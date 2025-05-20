@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="darkreader-lock">
+    <meta name="description" content="This allows you to whitelist video player links.">
+    <meta name="application-name" content="CVR Whitelist Configurator">
+    <title>CVR Whitelist Configurator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            color-scheme: dark;
+        }
+        
+        body {
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+        }
+
+        .card {
+            background-color: #2d2d2d;
+            border-color: #404040;
+        }
+
+        .policy-card {
+            margin-bottom: 1rem;
+            border: 1px solid #404040;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            background-color: #2d2d2d;
+        }
+
+        .policy-card:hover {
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.3);
+            border-color: #505050;
+        }
+
+        .url-input {
+            font-family: monospace;
+        }
+
+        .file-input-container {
+            margin-bottom: 2rem;
+        }
+
+        .form-control, .form-select {
+            background-color: #333333;
+            border-color: #404040;
+            color: #e0e0e0;
+        }
+
+        .form-control:focus, .form-select:focus {
+            background-color: #404040;
+            border-color: #505050;
+            color: #e0e0e0;
+        }
+
+        .form-label, .card-title {
+            color: #e0e0e0;
+        }
+
+        .form-control::placeholder {
+            color: #bbbbbb;
+            opacity: 1;
+        }
+
+        .form-text {
+            color: #a0a0a0;
+        }
+
+        .alert-info {
+            background-color: #2c3e50;
+            border-color: #34495e;
+            color: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-4">
+        <h1 class="mb-4">CVR Whitelist Configurator</h1>
+        
+        <!-- File Input Section -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Load JSON File</h5>
+                <div class="file-input-container">
+                    <input type="file" class="form-control" id="jsonFileInput" accept=".json">
+                    <div class="form-text">Select your UrlWhitelist.json file to begin editing</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Add New Policy Form -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Add New Policy</h5>
+                <form id="addPolicyForm">
+                    <div class="mb-3">
+                        <label for="urlHost" class="form-label">URL Host</label>
+                        <input type="text" class="form-control url-input" id="urlHost" placeholder="example.com or *.example.com or ^(www\.)?example\.com$">
+                        <div class="form-text">Enter exact domain, wildcard (*.domain.com), or regex pattern</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="policyType" class="form-label">Policy Type</label>
+                        <select class="form-select" id="policyType">
+                            <option value="Allow">Allow</option>
+                            <option value="Deny">Deny</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Policy</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Policies List -->
+        <h2 class="mb-3">Current Policies</h2>
+        <div id="policiesList"></div>
+
+        <!-- Save Button -->
+        <div class="mt-4">
+            <button id="saveButton" class="btn btn-success">Save Changes</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html> 
